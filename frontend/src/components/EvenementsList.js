@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config';
 import { Link } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import TruncatedText from './TruncatedText';
 
 
@@ -51,7 +53,22 @@ const [eventIdToDelete, setEventIdToDelete] = useState(null);
   };
 
   
-  return (
+  return (<>{showModal && (
+    <Modal show={showModal} onHide={hideModal}>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirmation</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Êtes-vous sûr de vouloir supprimer cet événement ?</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={hideModal}>
+          Annuler
+        </Button>
+        <Button variant="danger" onClick={handleDelete}>
+          Supprimer
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )}
     <div  className="container mt-5">
       <h2>Liste des Événements</h2>
       <Link to="/evenement/new" className="btn btn-success mb-3">Créer un événement</Link>
@@ -61,7 +78,7 @@ const [eventIdToDelete, setEventIdToDelete] = useState(null);
             <th scope="col">#</th>
             <th scope="col">Logo</th>
             <th scope="col">Libellé</th>
-            {/* <th scope="col">Description</th> */}
+            <th scope="col">Description</th>
             <th scope="col">Lieu</th>
             <th scope="col">Début</th>
             <th scope="col">Fin</th>
@@ -88,27 +105,8 @@ const [eventIdToDelete, setEventIdToDelete] = useState(null);
           ))}
         </tbody>
       </table>
-      {showModal && (
-  <div className="modal show d-block" tabIndex="-1">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title">Confirmation</h5>
-          <button type="button" className="btn-close" onClick={hideModal}></button>
-        </div>
-        <div className="modal-body">
-          <p>Êtes-vous sûr de vouloir supprimer cet événement ?</p>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-secondary" onClick={hideModal}>Annuler</button>
-          <button type="button" className="btn btn-danger" onClick={handleDelete}>Supprimer</button>
-        </div>
-      </div>
     </div>
-    <div className="modal-backdrop show"></div>
-  </div>
-)}
-    </div>
+  </>
   );
 };
 

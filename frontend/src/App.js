@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="container mt-4">
+      <div className="mt-4">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<PrivateRoute component={EvenementsList} />} />
