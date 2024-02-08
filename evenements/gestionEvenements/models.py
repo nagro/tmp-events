@@ -1,5 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User
+
+class Organisateur(models.Model):
+    TYPE_CHOICES = (
+        ('physique', 'Physique'),
+        ('morale', 'Morale'),
+    )
+    nom = models.CharField(max_length=100)
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES)
+
+    def __str__(self):
+        return self.nom
+
 
 class Evenement(models.Model):
     libelle = models.CharField(max_length=100)
@@ -9,7 +20,7 @@ class Evenement(models.Model):
     debut = models.DateTimeField()
     fin = models.DateTimeField()
     categorie = models.CharField(max_length=50)
-    proprietaire = models.ForeignKey(User, on_delete=models.CASCADE)
+    proprietaire = models.ForeignKey(Organisateur, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.libelle
