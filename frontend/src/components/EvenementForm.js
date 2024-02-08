@@ -35,6 +35,7 @@ const EvenementForm = () => {
             debut: data.debut.split('T')[0], // TODO:utiliser momentjs
             fin: data.fin.split('T')[0], 
             categorie: data.categorie,
+            logo:data.logo
           });
         })
         .catch(err => console.log(err));
@@ -75,30 +76,50 @@ const EvenementForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Libellé</label>
-      <input type="text" name="libelle" value={formData.libelle} onChange={handleChange} />
+    <div className="container mt-5">
+      <div className='row col-md-6 m-auto'>
+        <h2 className='m-5'>{id ? 'Modifier un événement' : 'Créer un nouvel événement'}</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="libelle" className="form-label">Libellé</label>
+          <input type="text" className="form-control" id="libelle" name="libelle" value={formData.libelle} onChange={handleChange} />
+        </div>
+        
+        <div className="mb-3">
+          <label htmlFor="lieu" className="form-label">Lieu</label>
+          <input type="text" className="form-control" id="lieu" name="lieu" value={formData.lieu} onChange={handleChange} />
+        </div>
 
-      <label>Lieu</label>
-      <input type="text" name="lieu" value={formData.lieu} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">Description</label>
+          <textarea className="form-control" id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
+        </div>
 
-      <label>Description</label>
-      <textarea name="description" value={formData.description} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="debut" className="form-label">Date de début</label>
+          <input type="date" className="form-control" id="debut" name="debut" value={formData.debut} onChange={handleChange} />
+        </div>
 
-      <label>Date de début</label>
-      <input type="date" name="debut" value={formData.debut} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="fin" className="form-label">Date de fin</label>
+          <input type="date" className="form-control" id="fin" name="fin" value={formData.fin} onChange={handleChange} />
+        </div>
 
-      <label>Date de fin</label>
-      <input type="date" name="fin" value={formData.fin} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="categorie" className="form-label">Catégorie</label>
+          <input type="text" className="form-control" id="categorie" name="categorie" value={formData.categorie} onChange={handleChange} />
+        </div>
 
-      <label>Catégorie</label>
-      <input type="text" name="categorie" value={formData.categorie} onChange={handleChange} />
+        <div className="mb-3">
+          <label htmlFor="logo" className="form-label">Logo</label>
+          {formData.logo && <img src={formData.logo} alt="Logo" style={{width: "50px", height: "50px"}} />}
+          <input type="file" className="form-control" id="logo" name="logo" onChange={handleFileChange} />
+        </div>
 
-      <label>Logo</label>
-      <input type="file" name="logo" onChange={handleFileChange} />
-
-      <button type="submit">Enregistrer</button>
-    </form>
+        <button type="submit" className="btn btn-primary">{id ? 'Mettre à jour' : 'Créer'}</button>
+      </form>
+      </div>
+    </div>
   );
 };
 

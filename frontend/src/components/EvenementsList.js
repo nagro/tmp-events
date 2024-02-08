@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config';
 import { Link } from 'react-router-dom';
+import TruncatedText from './TruncatedText';
 
 
 const EvenementsList = () => {
@@ -60,6 +61,7 @@ const [eventIdToDelete, setEventIdToDelete] = useState(null);
             <th scope="col">#</th>
             <th scope="col">Logo</th>
             <th scope="col">Libellé</th>
+            {/* <th scope="col">Description</th> */}
             <th scope="col">Lieu</th>
             <th scope="col">Début</th>
             <th scope="col">Fin</th>
@@ -74,6 +76,7 @@ const [eventIdToDelete, setEventIdToDelete] = useState(null);
                 {evenement.logo && <img src={evenement.logo} alt="Logo" style={{width: "50px", height: "50px"}} />}
               </td>
               <td>{evenement.libelle}</td>
+              {/* <td><TruncatedText text={evenement.description} maxLength={60} /></td> */}
               <td>{evenement.lieu}</td>
               <td>{new Date(evenement.debut).toLocaleDateString()}</td>
               <td>{new Date(evenement.fin).toLocaleDateString()}</td>
