@@ -27,6 +27,7 @@ python manage.py runserver
 
 ### Frontend (React)
 
+```bash
 # Accédez au dossier frontend
 cd frontend
 
@@ -35,3 +36,5 @@ npm install
 
 # Lancez l'application
 npm start
+
+```
